@@ -21,8 +21,6 @@ const deactivationPlayer = () => {
     );
 
 
-
-
 radioPlayerInit();
 musicPlayerInit();
 videoPlayerInit();
