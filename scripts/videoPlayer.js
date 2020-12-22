@@ -6,6 +6,11 @@ const videoButtonStop = document.querySelector('.video-button__stop');
 const videoTimePassed = document.querySelector('.video-time__passed');
 const videoProgress = document.querySelector('.video-progress');
 const videoTimeTotal = document.querySelector('.video-time__total');
+const videoVolume = document.querySelector('.video-volume');
+const videoVolMute = document.querySelector('.fa-times-circle');
+const videoVolDownBtn = document.querySelector('.fa-volume-down');
+const videoVolUpBtn = document.querySelector('.fa-volume-up');
+
 
 const toggleIcon = () => {
     if( videoPlayer.paused ) {
@@ -31,6 +36,11 @@ const stopPlay = () => {
     videoPlayer.currentTime = 0;
 };
 
+const changeValue = () => {
+    const valueVolume = videoVolume.value;
+    videoPlayer.volume = valueVolume / 100 ;
+};
+
 const addZero = n =>  n < 10 ? '0' + n : n ;
 
 videoPlayer.addEventListener('click', togglePlay);
@@ -53,13 +63,64 @@ videoPlayer.addEventListener('timeupdate', () => {
     videoTimeTotal.textContent = addZero(minuteTotal) + ':' + addZero(secondTotal);
 });
 
-videoProgress.addEventListener('change', () => {
+videoProgress.addEventListener('input', () => {
     const duration = videoPlayer.duration;
     const value = videoProgress.value;
     videoPlayer.currentTime = (value * duration) / 100;
 });
 
+videoVolume.addEventListener('input', changeValue);
+
 videoButtonStop.addEventListener('click', stopPlay);
+
+changeValue();
+
+videoVolMute.addEventListener('click', () => {
+videoVolume.value = 0;
+changeValue();
+});
+
+videoVolDownBtn.addEventListener('click', () => {
+if(videoVolume.value > +videoVolume.min) {
+    videoVolume.value--;
+    console.log(videoVolume.value);
+}
+changeValue();
+});
+
+videoVolDownBtn.addEventListener('dblclick', () => {
+    let q;
+if(!videoVolDownBtn.classList.contains('pressed')) {
+    videoVolDownBtn.classList.add('pressed');
+    q = videoVolume.value;
+    videoVolume.value = videoVolume.min;
+    } else {
+    videoVolDownBtn.classList.remove('pressed');
+    videoVolume.value = q;
+    }
+    changeValue();
+});
+
+videoVolUpBtn.addEventListener('click', () => {
+if(videoVolume.value < +videoVolume.max) {
+    videoVolume.value++;
+    console.log(videoVolume.value);
+}
+changeValue();
+});
+
+videoVolUpBtn.addEventListener('dblclick', () => {
+    let q;
+    if(!videoVolUpBtn.classList.contains('pressed')) {
+        videoVolUpBtn.classList.add('pressed');
+        q = videoVolume.value;
+        videoVolume.value = videoVolume.max;
+        } else {
+        videoVolUpBtn.classList.remove('pressed');
+        videoVolume.value = q;
+        }
+        changeValue();
+});
 
 
 
