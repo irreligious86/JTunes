@@ -122,6 +122,4 @@ videoVolUpBtn.addEventListener('dblclick', () => {
         changeValue();
 });
 
-
-
 };
