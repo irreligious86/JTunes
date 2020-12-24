@@ -1,3 +1,6 @@
 export const musicPlayerInit = () => {
-    console.log('music Player');
+    musicPlayerInit.stop = () => {
+        // musicPlayer.pause();
+        // toggleIcon();
+        };
 };

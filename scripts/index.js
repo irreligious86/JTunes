@@ -11,6 +11,10 @@ const deactivationPlayer = () => {
     temp.style.display = "none";
     playerBtn.forEach( item => item.classList.remove('active'));
     playerBlock.forEach( item => item.classList.remove('active'));
+
+videoPlayerInit.stop();
+musicPlayerInit.stop();
+radioPlayerInit.stop();
 };
 
     playerBtn.forEach((item, i) => item.addEventListener('click', () => {

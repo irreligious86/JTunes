@@ -10,7 +10,21 @@ const videoVolume = document.querySelector('.video-volume');
 const videoVolMute = document.querySelector('.fa-times-circle');
 const videoVolDownBtn = document.querySelector('.fa-volume-down');
 const videoVolUpBtn = document.querySelector('.fa-volume-up');
+const videoFullscreen = document.querySelector('.video-fullscreen');
 
+videoFullscreen.addEventListener('click', () => {
+    console.log(document.fullscreenElement);
+    videoPlayer.requestFullscreen();
+    videoPlayer.controls = true;
+});
+
+videoPlayer.addEventListener('fullscreenchange', () => {
+    if(document.fullscreen) {
+        videoPlayer.controls = true;
+    } else {
+        videoPlayer.controls = false;
+    }
+});
 
 const toggleIcon = () => {
     if( videoPlayer.paused ) {
@@ -44,16 +58,23 @@ const changeValue = () => {
 const addZero = n =>  n < 10 ? '0' + n : n ;
 
 videoPlayer.addEventListener('click', togglePlay);
-
 videoButtonPlay.addEventListener('click', togglePlay);
 
-videoPlayer.addEventListener('play', toggleIcon);
+// videoPlayer.addEventListener('fullscreenchange', () => {
+//     if() {
+//         videoPlayer.removeEventListener('click', togglePlay)
+//     } else {
+//         videoPlayer.addEventListener('click', togglePlay)
+//     }
+// });
 
+videoPlayer.addEventListener('play', toggleIcon);
 videoPlayer.addEventListener('pause', toggleIcon);
 
 videoPlayer.addEventListener('timeupdate', () => {
     const currentTime = videoPlayer.currentTime;
     const duration = videoPlayer.duration;
+    
     videoProgress.value = (currentTime / duration) * 100 ;
     let minutePassed = Math.floor(currentTime / 60);
     let secondPassed = Math.floor(currentTime % 60);
@@ -70,6 +91,10 @@ videoProgress.addEventListener('input', () => {
 });
 
 videoVolume.addEventListener('input', changeValue);
+
+videoPlayer.addEventListener('volumechange', () => {
+    videoVolume.value = Math.round(videoPlayer.volume * 100)
+});
 
 videoButtonStop.addEventListener('click', stopPlay);
 
@@ -122,4 +147,8 @@ videoVolUpBtn.addEventListener('dblclick', () => {
         changeValue();
 });
 
+videoPlayerInit.stop = () => {
+videoPlayer.pause();
+toggleIcon();
+};
 };

@@ -61,11 +61,12 @@
 						<p class="video-time video-time__passed">00:00</p>
 						<input type="range" class="video-progress" min="0" max="100" step="0.1" value="0">
 						<p class="video-time video-time__total">00:00</p>
-						<span class="video-icon fa fa-times-circle"></span>
+						<span class="video-icon fa fa-times-circle control-icon"></span>
 						<!-- <span class="video-icon fa fa-volume-off"></span> -->
-						<span class="video-icon fa fa-volume-down"></span>
-						<input type="range" class="video-volume" min="0" max="100" step="1" value="30" >
-						<span class="video-icon fa fa-volume-up"></span>
+						<span class="video-icon fa fa-volume-down control-icon"></span>
+						<input type="range" class="video-volume control-volume" min="0" max="100" step="1" value="30" >
+						<span class="video-icon fa fa-volume-up control-icon"></span>
+						<span class="video-icon fa fa-window-maximize video-fullscreen"></span>
 					</nav>
 				</div>
 			</div>
@@ -116,7 +117,7 @@
 										<img class="radio-img" src="radio/RTLGroove.png" alt="обложка">
 									</div>
 									<input class="radio-btn" type="radio" id="RTLGroove" name="radioStantion"
-											data-radio-stantion="http://shoutcast.rtl.it:3040/">
+											data-radio-stantion="http://server.laradio.online:8799/live">
 									<span class="radio-name">RTL Groove</span>
 								</label>
 							</li>
@@ -127,7 +128,7 @@
 										<img class="radio-img" src="radio/Energy.png" alt="обложка">
 									</div>
 									<input class="radio-btn" type="radio" id="energy" name="radioStantion"
-											data-radio-stantion="http://ic4.101.ru:8000/region_energy_161">
+											data-radio-stantion="https://play.tavr.media/radioroks/">
 									<span class="radio-name">Energy</span>
 								</label>
 							</li>
@@ -182,6 +183,10 @@
 			</div>
 			<footer class="footer-fix radio-footer">
 				<button class="radio-stop fa fa-play"></button>
+				<span class="radio-icon fa fa-volume-off control-icon"></span>
+				<input type="range" class="radio-volume control-volume" min="0" max="100" step="1" value="30" >
+				<span class="radio-icon fa fa-volume-up control-icon"></span>
+				<span class="radio-icon fa fa-volume-off control-icon radio-mute"></span>
 			</footer>
 		</article>
 	</main>
