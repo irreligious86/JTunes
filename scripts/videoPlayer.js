@@ -1,3 +1,5 @@
+import { addZero } from './supScript.js';
+
 export const videoPlayerInit = () => {
 
 const videoPlayer = document.querySelector('.video-player');
@@ -55,8 +57,6 @@ const changeValue = () => {
     videoPlayer.volume = valueVolume / 100 ;
 };
 
-const addZero = n =>  n < 10 ? '0' + n : n ;
-
 videoPlayer.addEventListener('click', togglePlay);
 videoButtonPlay.addEventListener('click', togglePlay);
 
@@ -76,10 +76,12 @@ videoPlayer.addEventListener('timeupdate', () => {
     const duration = videoPlayer.duration;
     
     videoProgress.value = (currentTime / duration) * 100 ;
-    let minutePassed = Math.floor(currentTime / 60);
-    let secondPassed = Math.floor(currentTime % 60);
-    let minuteTotal = Math.floor(duration / 60);
-    let secondTotal = Math.floor(duration % 60);
+
+    const minutePassed = Math.floor(currentTime / 60) || '0';
+    const secondPassed = Math.floor(currentTime % 60) || '0';
+    const minuteTotal = Math.floor(duration / 60) || '0';
+    const secondTotal = Math.floor(duration % 60) || '0';
+    
     videoTimePassed.textContent = addZero(minutePassed) + ':' + addZero(secondPassed);
     videoTimeTotal.textContent = addZero(minuteTotal) + ':' + addZero(secondTotal);
 });
